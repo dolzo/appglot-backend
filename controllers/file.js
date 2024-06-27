@@ -1,12 +1,9 @@
 // Dependencias
 const AWS = require('aws-sdk');
-const fs = require('fs');
-const fsx = require('fs-extra');
 const path = require('path');
-const archiver = require('archiver');
-const tesseract = require('tesseract.js');
 const multerS3 = require('multer-s3');
 const multer = require('multer');
+const File = require('../models/file');
 
 AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY,
@@ -30,6 +27,7 @@ const uploadMulter = multer({
 
 const uploadFile = async (req, res) => {
     // Cargar con multer
+
     uploadMulter(req, res, (err) => {
         // Ignorar este error
         if (err.message === 'Unexpected end of form') {
@@ -43,10 +41,32 @@ const uploadFile = async (req, res) => {
         }
     });
 
-    return res.status(200).send({
-        status: 'ok',
-        message: 'Archivo subido',
+    // Obtener url del archivo
+    const fileUrl = req.file.location;
+
+    // Modelo con datos del archivo
+    const newFile = new File({
+        fileName: req.file.key,
+        fileUrl: fileUrl,
     });
+
+    // Guardar instancia en mongo
+    newFile
+        .save()
+        .then((saved) => {
+            res.status(200).send({
+                status: 'ok',
+                message: 'Archivo subido',
+                file: saved,
+            });
+        })
+        .catch((error) => {
+            res.status(500).send({
+                status: 'error',
+                message: 'Archivo subido',
+                error: error,
+            });
+        });
 };
 
 module.exports = { uploadMulter, uploadFile };
