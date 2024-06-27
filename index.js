@@ -36,8 +36,8 @@ const translate = require('./routes/translate');
 app.use('/api/text', textRoutes);
 app.use('/api/audio', audioRoutes);
 app.use('/api/file', fileRoutes);
-app.use('/api/translate', translate);
 */
+app.use('/api/translate', translate);
 
 // Ruta de pruebas
 app.get('/', (req, res) => {
