@@ -26,9 +26,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Cargar configuracion de rutas
-const textRoutes = require('./routes/text');
-const audioRoutes = require('./routes/audio');
-const fileRoutes = require('./routes/file');
+//const textRoutes = require('./routes/text');
+//const audioRoutes = require('./routes/audio');
+const file = require('./routes/file');
 const translate = require('./routes/translate');
 
 // TODO: completar las rutas
@@ -38,6 +38,7 @@ app.use('/api/audio', audioRoutes);
 app.use('/api/file', fileRoutes);
 */
 app.use('/api/translate', translate);
+app.use('/api/file', file);
 
 // Ruta de pruebas
 app.get('/', (req, res) => {
@@ -50,3 +51,6 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Escuchando al puerto ${port}`);
 });
+
+// Ocultar mensaje de mantenimiento de aws
+process.env.AWS_SDK_JS_SUPPRESS_MAINTENANCE_MODE_MESSAGE = '1';
