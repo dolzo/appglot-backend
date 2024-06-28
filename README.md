@@ -1,0 +1,2 @@
+# Backend para AppGlot Translate
+
