@@ -6,9 +6,9 @@ const multer = require('multer');
 const router = express.Router();
 
 // Importar controladores
-const translateText = require('../controllers/translateText');
+const translator = require('../controllers/translateText');
 
 // Rutas
-router.post('/translate-text/:lang/:text', translateText);
+router.post('/translate-text/:lang/:text', translator.translateText);
 
 module.exports = router;

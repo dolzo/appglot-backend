@@ -6,9 +6,10 @@ const multer = require('multer');
 const router = express.Router();
 
 // Importar controladores
-const uploadFile = require('../controllers/file');
+const file = require('../controllers/file');
 
 // Rutas
-router.post('/upload-file', uploadFile.uploadMulter, uploadFile.uploadFile);
+router.post('/upload-file', file.uploadMulter, file.uploadFile);
+router.post('/translate-file/:lang/:imageName', file.translateFile);
 
 module.exports = router;
