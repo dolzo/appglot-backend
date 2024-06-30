@@ -30,6 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 //const audioRoutes = require('./routes/audio');
 const file = require('./routes/file');
 const translate = require('./routes/translate');
+const user = require('./routes/user');
 
 // TODO: completar las rutas
 /*
@@ -39,6 +40,7 @@ app.use('/api/file', fileRoutes);
 */
 app.use('/api/translate', translate);
 app.use('/api/file', file);
+app.use('/api/user', user);
 
 // Ruta de pruebas
 app.get('/', (req, res) => {

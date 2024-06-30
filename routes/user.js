@@ -6,9 +6,11 @@ const auth = require('../middleware/auth');
 const router = express.Router();
 
 // Importar controladores
-const translator = require('../controllers/translateText');
+const userController = require('../controllers/user');
 
 // Rutas
-router.post('/translate-text/:lang/:text', auth, translator.translateText);
+
+router.post('/register', userController.register);
+router.post('/login', userController.login);
 
 module.exports = router;
