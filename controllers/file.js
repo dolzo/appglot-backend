@@ -74,6 +74,28 @@ const uploadFile = async (req, res) => {
 };
 
 const translateFile = async (req, res) => {
+    // Parametros de la traduccion
+    const translationLang = req.params.lang;
+
+    // Parametros del archivo
+    const imageKey = req.params.imageName;
+
+    const originalImageName = String(imageKey).split('.')[0];
+    const imageExtension = String(imageKey).split('.')[1];
+
+    if (
+        imageExtension != 'png' &&
+        imageExtension != 'jpeg' &&
+        imageExtension != 'jpg' &&
+        imageExtension != 'gif'
+    ) {
+        return res.status(500).send({
+            status: 'error',
+            message: 'Formato de el archivo no valido',
+            imageExtension,
+        });
+    }
+
     // Si no hay parametros
     if (!req.params.imageName || !req.params.lang) {
         return res.status(404).send({
@@ -82,13 +104,6 @@ const translateFile = async (req, res) => {
                 'No se han proporcionado el parametro de la imagen o el parametro del lenguaje',
         });
     }
-
-    // Parametros de la traduccion
-    const translationLang = req.params.lang;
-
-    // Parametros del archivo
-    const imageKey = req.params.imageName;
-    const originalImageName = String(imageKey).split('.')[0];
 
     // Directorio donde guardar el archivo
     const directory = `temp/${originalImageName}`;
