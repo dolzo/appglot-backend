@@ -8,7 +8,6 @@ const fs = require('fs');
 const fsx = require('fs-extra');
 const tesseract = require('tesseract.js');
 const translator = require('../controllers/translateText');
-const auth = require('../middleware/auth');
 
 AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY,
@@ -25,7 +24,11 @@ const uploadMulter = multer({
         bucket: process.env.AWS_BUCKET_NAME,
         key: (req, file, cb) => {
             // Clave unica
-            cb(null, Date.now().toString() + path.extname(file.originalname));
+            cb(
+                null,
+                `${file.originalname.split('.')[0]}-${Date.now().toString()}` +
+                    path.extname(file.originalname)
+            );
         },
     }),
 }).single('file0');

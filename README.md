@@ -96,7 +96,9 @@ Se obtiene la información de un usuario mediante su email
 
 Request:
 
-`localhost:7734/api/user/get-user/email@email.com`
+```
+/api/user/get-user/email@email.com
+```
 
 Response:
 
@@ -145,17 +147,70 @@ Se sube un archivo a s3 para poder trabajar con el
 ##### Headers
 
 -   Authorization: Token de autenticación
+-   Content-Type: multipart/form-data
 
 Request:
 
 ```
 {
-    "file0": form-data
+    "file0": omori album.jpeg
 }
 ```
 
 Response:
 
 ```
+{
+    "status": "ok",
+    "message": "Archivo subido",
+    "file": {
+        "fileName": "poem1-1719922242617.png",
+        "fileUrl": "https://appglotnodejs.s3.amazonaws.com/poem1-1719922242617.png",
+        "_id": "6683ee43216b5f84732274e5",
+        "created_at": "2024-07-02T12:10:43.266Z",
+        "__v": 0
+    }
+}
+```
+
+#### `POST /api/file/translate-file/:lang/:filename`
+
+Se traduce el archivo con nombre `fileName` devuelto por la ruta de subida al lenguaje `lang` especificado
+
+##### Headers
+
+-   Authorization: Token de autenticación
+
+Request:
 
 ```
+api/file/translate-file/es/poem1-1719922242617.png
+```
+
+Response:
+
+```
+{
+    "status": "ok",
+    "message": "Archivo traducido exitosamente",
+    "res": "De quién son estos bosques, creo que lo sé.\nAunque su casa está en el pueblo;\n\nÉl no me verá parar aquí.\n\nVer sus bosques llenarse de nieve."
+}
+```
+
+## Manejo de errores
+
+Se detallan algunos codigos de errores que se usan en este backend:
+
+-   `200`: La solicitud se realizó con éxito
+-   `400`: La solicitud es incorrecta o no está bien formada
+-   `401`: La autorización ha fallado
+-   `404`: La solicitud carece de algunos parámetros
+-   `500`: El servidor no pudo realizar la petición
+
+## Autenticación
+
+Este backend utiliza JWT como medio de autenticación, es por ello que para las solicitudes que requieran una cabecera de autorización, se debe añadir dicha cabecera y colocar en ella el token entregado por el endpoint `/api/user/login`
+
+## Soporte
+
+dudas: preguntenle al diego xd

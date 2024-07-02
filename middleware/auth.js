@@ -10,7 +10,7 @@ const secret = libjwt.secret;
 const auth = (req, res, next) => {
     // Comprobar si llega la cabecera de autenticacion
     if (!req.headers.authorization) {
-        return res.status(403).send({
+        return res.status(401).send({
             status: 'error',
             message: 'La peticion carece de cabecera de autenticacion',
         });
