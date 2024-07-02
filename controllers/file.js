@@ -8,6 +8,7 @@ const fs = require('fs');
 const fsx = require('fs-extra');
 const tesseract = require('tesseract.js');
 const translator = require('../controllers/translateText');
+const auth = require('../middleware/auth');
 
 AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY,

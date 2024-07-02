@@ -1,8 +1,8 @@
 // Dependecias
 const validator = require('validator');
 
-// Funcion para validar
-const validate = (params) => {
+// Funcion para validar el registro
+const validateRegister = (params) => {
     let name =
         !validator.isEmpty(params.name) &&
         validator.isLength(params.name, { min: 3, max: undefined }) &&
@@ -31,9 +31,16 @@ const validate = (params) => {
 
     if (!name || !surname || !email || !password) {
         throw new Error('No se ha superado la validacion');
-    } else {
-        console.log('Validacion superada');
     }
 };
 
-module.exports = validate;
+// Funcion para validar un email
+const validateEmail = (email) => {
+    let emailOk = !validator.isEmpty(email) && validator.isEmail(email);
+
+    if (!emailOk) {
+        throw new Error('Email no valido');
+    }
+};
+
+module.exports = { validateRegister, validateEmail };

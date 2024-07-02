@@ -19,7 +19,7 @@ const register = async (req, res) => {
 
     // Validacion avanzada
     try {
-        validate(params);
+        validate.validateRegister(params);
     } catch (e) {
         return res.status(400).send({
             status: 'error',
@@ -117,4 +117,38 @@ const login = async (req, res) => {
     });
 };
 
-module.exports = { register, login };
+const getUser = async (req, res) => {
+    // Recibir parametros
+    const params = req.params;
+
+    // Validar parametros
+    try {
+        validate.validateEmail(params.email);
+    } catch (e) {
+        return res.status(400).send({
+            status: 'error',
+            message: 'El correo proporcionado no es valido',
+        });
+    }
+
+    // Buscar en mongo si existe el usuario
+    const userFound = await User.findOne({ email: params.email })
+        .select('-password')
+        .exec();
+
+    // Si no hay usuarios, indicarlo
+    if (!userFound) {
+        return res.status(200).send({
+            status: 'ok',
+            message: 'No hay usuario con el email proporcionado',
+        });
+    }
+
+    // Devolver el usuario
+    return res.status(200).send({
+        status: 'ok',
+        userFound,
+    });
+};
+
+module.exports = { register, login, getUser };

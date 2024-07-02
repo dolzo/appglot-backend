@@ -6,7 +6,7 @@ const moment = require('moment');
 const libjwt = require('../helpers/jwt');
 const secret = libjwt.secret;
 
-// Middleware de autenticacion
+// Middleware de autenticacionD
 const auth = (req, res, next) => {
     // Comprobar si llega la cabecera de autenticacion
     if (!req.headers.authorization) {
@@ -37,7 +37,7 @@ const auth = (req, res, next) => {
         return res.status(404).send({
             status: 'error',
             message: 'El token es invalido',
-            error: e,
+            error: e.message,
         });
     }
 

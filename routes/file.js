@@ -1,6 +1,6 @@
 // Dependencias
 const express = require('express');
-const multer = require('multer');
+const auth = require('../middleware/auth');
 
 // Cargar router
 const router = express.Router();
@@ -9,7 +9,7 @@ const router = express.Router();
 const file = require('../controllers/file');
 
 // Rutas
-router.post('/upload-file', file.uploadMulter, file.uploadFile);
-router.post('/translate-file/:lang/:imageName', file.translateFile);
+router.post('/upload-file', auth, file.uploadMulter, file.uploadFile);
+router.post('/translate-file/:lang/:imageName', auth, file.translateFile);
 
 module.exports = router;
