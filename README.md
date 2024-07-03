@@ -35,7 +35,7 @@ Request:
 {
     name: nombre,
     surname: apellido,
-    email: email.email.com
+    email: email.email.com,
     password: Password1
 }
 ```
@@ -66,7 +66,7 @@ Request:
 
 ```
 {
-    email:email@email.com
+    email:email@email.com,
     password:Password1
 }
 ```
@@ -90,14 +90,16 @@ Response:
 }
 ```
 
-#### `GET /api/user/get-user/:email`
+#### `POST /api/user/get-user/`
 
 Se obtiene la información de un usuario mediante su email
 
 Request:
 
 ```
-/api/user/get-user/email@email.com
+{
+    email:calopez@email.com
+}
 ```
 
 Response:
@@ -106,10 +108,40 @@ Response:
 {
     "status": "ok",
     "userFound": {
+        "_id": "6685974623c8d3b9456f28b0",
+        "name": "Carlos",
+        "surname": "Lopez",
+        "email": "calopez@email.com",
+        "created_at": "2024-07-03T18:24:06.259Z",
+        "__v": 0
+    }
+}
+```
+
+#### `PUT /api/user/update-user/`
+
+Se actualizan los datos de un usuario registrado
+
+Request:
+
+```
+    name: Bastian,
+    surname: Lopez,
+    email: calopez1@email.com,
+    password: Meme1234
+```
+
+Response:
+
+```
+{
+    "status": "ok",
+    "message": "Usuario actualizado",
+    "user": {
         "_id": "66830c3af94509eeb3c0fa76",
-        "name": "nombre",
-        "surname": "apellido",
-        "email": "email@email.com",
+        "name": "Bastian",
+        "surname": "Lopez",
+        "email": "calopez1@email.com",
         "created_at": "2024-07-01T20:06:18.770Z",
         "__v": 0
     }
@@ -213,4 +245,4 @@ Este backend utiliza JWT como medio de autenticación, es por ello que para las 
 
 ## Soporte
 
-dudas: preguntenle al diego xd
+Dudas: preguntenle al diego xd

@@ -119,7 +119,7 @@ const login = async (req, res) => {
 
 const getUser = async (req, res) => {
     // Recibir parametros
-    const params = req.params;
+    const params = req.body;
 
     // Validar parametros
     try {
@@ -151,4 +151,68 @@ const getUser = async (req, res) => {
     });
 };
 
-module.exports = { register, login, getUser };
+const updateUser = async (req, res) => {
+    try {
+        // Recibir usuario identificado
+        const userIdentity = req.user;
+
+        // Recibir usuario a actualizar
+        const userToUpdate = req.body;
+
+        // Comprobar si el usuario ya existe
+        const usersFound = await User.find({
+            $or: [{ email: userToUpdate.email.toLowerCase() }],
+        }).exec();
+
+        // Comprobar si el usuario existe y no soy yo (el identificado)
+        let userIsSet = false;
+        usersFound.forEach((user) => {
+            if (user && user._id.toString() !== userIdentity.id) {
+                userIsSet = true;
+            }
+        });
+
+        // Si ya existe devolver respuesta
+        if (userIsSet) {
+            return res.status(200).send({
+                status: 'ok',
+                message: 'El correo indicado ya está en uso',
+            });
+        }
+
+        // Cifrar password si es que llega
+        if (userToUpdate.password) {
+            const cypheredPassword = await bcrypt.hash(
+                userToUpdate.password,
+                10
+            );
+            userToUpdate.password = cypheredPassword;
+        } else {
+            delete userToUpdate.password;
+        }
+
+        // Buscar usuario y actualizar
+        const updatedUser = await User.findByIdAndUpdate(
+            { _id: userIdentity.id },
+            userToUpdate,
+            { new: true }
+        ).exec();
+
+        // Devolver respuesta
+        return res.status(200).send({
+            status: 'ok',
+            message: 'Usuario actualizado',
+            user: updatedUser,
+        });
+    } catch (e) {
+        // Devolver error
+        console.error('Error al actualizar el usuario:', e);
+        return res.status(500).send({
+            status: 'error',
+            message: 'Error al actualizar el usuario',
+            error: e.message,
+        });
+    }
+};
+
+module.exports = { register, login, getUser, updateUser };
