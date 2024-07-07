@@ -9,6 +9,7 @@ const router = express.Router();
 const translator = require('../controllers/translateText');
 
 // Rutas
-router.post('/translate-text/:lang/:text', auth, translator.translateText);
+//router.post('/translate-text/', auth, translator.translateText);
+router.post('/translate-text/', translator.translateText);
 
 module.exports = router;

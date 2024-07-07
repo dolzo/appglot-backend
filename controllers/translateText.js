@@ -3,8 +3,15 @@ const translator = require('@vitalets/google-translate-api');
 
 // Traducir texto
 const translateText = async (req, res) => {
-    const text = req.params.text;
-    const lang = req.params.lang;
+    const text = req.body.text;
+    const lang = req.body.lang;
+
+    if (!text || !lang) {
+        return res.status(404).send({
+            res: 'error',
+            message: 'No se han entregado los parametros necesarios',
+        });
+    }
 
     try {
         const translatedText = await translate(text, lang);

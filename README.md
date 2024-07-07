@@ -150,15 +150,20 @@ Response:
 
 ### Traducción de texto
 
-#### `POST /api/translate/translate-text/:lang/:text`
+#### `POST /api/translate/translate-text/`
 
-Se traduce un texto `:text` al idioma seleccionado `:lang`
+Se traduce un texto `text` al idioma seleccionado `lang`
 
 ##### Headers
 
 -   Authorization: Token de autenticación
 
-Request: `/api/translate/translate-text/es/Welcome to black space`
+Request:
+
+```
+    "text": "Welcome to the back space",
+    "lang": "es"
+```
 
 Response:
 
