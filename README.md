@@ -161,7 +161,7 @@ Se traduce un texto `text` al idioma seleccionado `lang`
 Request:
 
 ```
-    "text": "Welcome to the back space",
+    "text": "Welcome to the black space",
     "lang": "es"
 ```
 
