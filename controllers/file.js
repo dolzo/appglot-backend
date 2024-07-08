@@ -90,8 +90,7 @@ const translateFile = async (req, res) => {
     if (
         imageExtension != 'png' &&
         imageExtension != 'jpeg' &&
-        imageExtension != 'jpg' &&
-        imageExtension != 'gif'
+        imageExtension != 'jpg'
     ) {
         return res.status(500).send({
             status: 'error',

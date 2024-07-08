@@ -25,7 +25,7 @@
 
 ### Usuarios
 
-#### `POST /api/user/register`
+#### `POST /api/user/register/`
 
 Se registra un nuevo usuario
 
@@ -58,7 +58,7 @@ Response:
 }
 ```
 
-#### `POST /api/user/login`
+#### `POST /api/user/login/`
 
 Se inicia sesión con las credenciales de un usuario registrado
 
@@ -125,10 +125,12 @@ Se actualizan los datos de un usuario registrado
 Request:
 
 ```
+{
     name: Bastian,
     surname: Lopez,
     email: calopez1@email.com,
     password: Meme1234
+}
 ```
 
 Response:
@@ -152,17 +154,15 @@ Response:
 
 #### `POST /api/translate/translate-text/`
 
-Se traduce un texto `text` al idioma seleccionado `lang`
-
-##### Headers
-
--   Authorization: Token de autenticación
+Se traduce un texto `text` al idioma seleccionado `lang`. Esta funcionalidad no requiere un authentication token.
 
 Request:
 
 ```
+{
     "text": "Welcome to the black space",
     "lang": "es"
+}
 ```
 
 Response:
@@ -177,13 +177,13 @@ Response:
 
 ### Traducción de archivos
 
-#### `POST /api/file/upload-file`
+#### `POST /api/file/upload-file/`
 
 Se sube un archivo a s3 para poder trabajar con el
 
 ##### Headers
 
--   Authorization: Token de autenticación
+-   Authorization: JSON web token
 -   Content-Type: multipart/form-data
 
 Request:
@@ -210,7 +210,7 @@ Response:
 }
 ```
 
-#### `POST /api/file/translate-file/:lang/:filename`
+#### `POST /api/file/translate-file/:lang/:filename/`
 
 Se traduce el archivo con nombre `fileName` devuelto por la ruta de subida al lenguaje `lang` especificado
 
@@ -246,7 +246,7 @@ Se detallan algunos codigos de errores que se usan en este backend:
 
 ## Autenticación
 
-Este backend utiliza JWT como medio de autenticación, es por ello que para las solicitudes que requieran una cabecera de autorización, se debe añadir dicha cabecera y colocar en ella el token entregado por el endpoint `/api/user/login`
+Este backend utiliza JWT como medio de autenticación, es por ello que para las solicitudes que requieran una cabecera de autorización, se debe añadir dicha cabecera y colocar en ella el token entregado por el endpoint `/api/user/login/`
 
 ## Soporte
 
