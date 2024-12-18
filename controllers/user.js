@@ -98,6 +98,7 @@ const login = async (req, res) => {
         userFound.password
     );
 
+    // Si la password no es correcta
     if (!passwordMatch) {
         return res.status(400).send({
             status: 'error',
