@@ -35,7 +35,7 @@ Request:
 {
     name: nombre,
     surname: apellido,
-    email: email.email.com,
+    email: email@email.com,
     password: Password1
 }
 ```
