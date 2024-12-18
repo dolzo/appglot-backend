@@ -246,8 +246,8 @@ Se detallan algunos codigos de errores que se usan en este backend:
 
 ## Autenticación
 
-Este backend utiliza JWT como medio de autenticación, es por ello que para las solicitudes que requieran una cabecera de autorización, se debe añadir dicha cabecera y colocar en ella el token entregado por el endpoint `/api/user/login/`
+Este backend utiliza JWT como medio de autenticación, es por ello que para las solicitudes que requieran una cabecera de autorización, se debe añadir dicha cabecera y colocar en ella el token entregado por el endpoint `/api/user/login/`.
 
 ## Soporte
 
-Dudas: preguntenle al diego xd
+En caso de cualquier duda contactarse al siguiente mail: `degolxz01@gmail.com`.
