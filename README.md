@@ -10,7 +10,7 @@
 
 1. Clonar el repositorio:
     ```bash
-    git clone https://github.com/LeDolz/appglot
+    git clone https://github.com/dolzo/appglot
     ```
 2. Navegar al directorio del proyecto:
     ```
