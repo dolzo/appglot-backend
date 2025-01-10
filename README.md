@@ -20,6 +20,7 @@
     ```
     npm install
     ```
+4. Reemplazar los campos del archivo `.env` con datos válidos de un bucket S3 de AWS.
 
 ## Rutas y endpoints
 
